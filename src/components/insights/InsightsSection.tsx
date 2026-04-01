@@ -10,7 +10,7 @@ import {
   Legend,
 } from "recharts";
 import { TrendingUp, TrendingDown, AlertCircle, Award } from "lucide-react";
-import { transactionsAtom } from "@/atoms";
+import { transactionsAtom, darkModeAtom } from "@/atoms";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   getMonthlyData,
@@ -50,7 +50,16 @@ function InsightCard({
 
 export function InsightsSection() {
   const transactions = useAtomValue(transactionsAtom);
+  const isDark = useAtomValue(darkModeAtom);
   const monthly = getMonthlyData(transactions);
+
+  const tooltipStyle = {
+    backgroundColor: isDark ? "#1e2a3a" : "#ffffff",
+    border: `1px solid ${isDark ? "#2d3f55" : "#e2e8f0"}`,
+    borderRadius: "8px",
+    fontSize: "12px",
+    color: isDark ? "#f1f5f9" : "#0f172a",
+  };
   const categories = getCategoryBreakdown(transactions);
   const { totalIncome, totalExpenses } = getSummary(transactions);
 
@@ -150,12 +159,9 @@ export function InsightsSection() {
               />
               <Tooltip
                 formatter={(value: number) => formatCurrency(value)}
-                contentStyle={{
-                  backgroundColor: "hsl(var(--card))",
-                  border: "1px solid hsl(var(--border))",
-                  borderRadius: "8px",
-                  fontSize: "12px",
-                }}
+                contentStyle={tooltipStyle}
+                itemStyle={{ color: isDark ? "#f1f5f9" : "#0f172a" }}
+                labelStyle={{ color: isDark ? "#f1f5f9" : "#0f172a" }}
               />
               <Legend wrapperStyle={{ fontSize: "12px" }} />
               <Bar dataKey="income" fill="#10b981" name="Income" radius={[4, 4, 0, 0]} />
