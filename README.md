@@ -22,7 +22,7 @@ A clean, interactive finance dashboard for tracking and understanding personal f
 ## Getting Started
 
 ```bash
-cd finance-dashboard
+git clone https://github.com/Manvendra-div/finance-dashboard.git
 npm install
 npm run dev
 ```
