@@ -4,49 +4,48 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 239 84% 67%;
-    --radius: 0.75rem;
+    /* Windows 2000 Silver/Gray palette */
+    --background: 210 11% 78%;         /* #C0C0C0 classic silver */
+    --foreground: 0 0% 0%;             /* black text */
+
+    --card: 210 11% 85%;               /* slightly lighter panel */
+    --card-foreground: 0 0% 0%;
+
+    --popover: 210 11% 85%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 213 100% 36%;           /* Win2000 title bar blue #0A246A */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 11% 78%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 210 11% 70%;
+    --muted-foreground: 0 0% 30%;
+
+    --accent: 213 100% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 80% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 11% 55%;
+    --input: 0 0% 100%;
+    --ring: 213 100% 36%;
+
+    /* Win2000 specific tokens */
+    --win-silver: 210 11% 78%;
+    --win-silver-light: 210 11% 93%;
+    --win-silver-dark: 210 11% 55%;
+    --win-shadow-dark: 0 0% 25%;
+    --win-shadow-light: 0 0% 100%;
+    --win-title: 213 100% 22%;
+    --win-title-end: 213 60% 55%;
+
+    --radius: 0rem;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 47% 8%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 47% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 239 84% 67%;
-  }
+  /* No dark mode — Win2000 was always light */
 }
 
 @layer base {
@@ -55,6 +54,118 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: "Tahoma", "Verdana", "MS Sans Serif", Arial, sans-serif;
+    font-size: 11px;
+  }
+}
+
+/* ============================================
+   WINDOWS 2000 CHROME UTILITIES
+   ============================================ */
+@layer utilities {
+  /* Raised 3D border (like a button or panel) */
+  .win-raised {
+    border-top: 2px solid hsl(0 0% 100%);
+    border-left: 2px solid hsl(0 0% 100%);
+    border-right: 2px solid hsl(0 0% 25%);
+    border-bottom: 2px solid hsl(0 0% 25%);
+  }
+
+  /* Sunken 3D border (like a pressed button or input) */
+  .win-sunken {
+    border-top: 2px solid hsl(0 0% 25%);
+    border-left: 2px solid hsl(0 0% 25%);
+    border-right: 2px solid hsl(0 0% 100%);
+    border-bottom: 2px solid hsl(0 0% 100%);
+  }
+
+  /* Double-depth raised (window border) */
+  .win-window {
+    border-top: 1px solid hsl(0 0% 100%);
+    border-left: 1px solid hsl(0 0% 100%);
+    border-right: 1px solid hsl(0 0% 15%);
+    border-bottom: 1px solid hsl(0 0% 15%);
+    outline: 1px solid hsl(210 11% 55%);
+    outline-offset: -2px;
+  }
+
+  /* Inset groove border */
+  .win-inset {
+    border-top: 1px solid hsl(0 0% 35%);
+    border-left: 1px solid hsl(0 0% 35%);
+    border-right: 1px solid hsl(0 0% 88%);
+    border-bottom: 1px solid hsl(0 0% 88%);
+  }
+
+  /* Title bar gradient */
+  .win-titlebar {
+    background: linear-gradient(to right, #0A246A 0%, #A6CAF0 100%);
+  }
+
+  .win-titlebar-inactive {
+    background: linear-gradient(to right, #7B7B7B 0%, #C0C0C0 100%);
+  }
+
+  /* Classic button press */
+  .win-btn {
+    background-color: hsl(210 11% 78%);
+    border-top: 2px solid hsl(0 0% 100%);
+    border-left: 2px solid hsl(0 0% 100%);
+    border-right: 2px solid hsl(0 0% 30%);
+    border-bottom: 2px solid hsl(0 0% 30%);
+    color: hsl(0 0% 0%);
+    font-family: "Tahoma", "Verdana", Arial, sans-serif;
+    font-size: 11px;
+    padding: 2px 8px;
+    cursor: default;
+  }
+  .win-btn:hover {
+    background-color: hsl(210 11% 82%);
+  }
+  .win-btn:active {
+    border-top: 2px solid hsl(0 0% 30%);
+    border-left: 2px solid hsl(0 0% 30%);
+    border-right: 2px solid hsl(0 0% 100%);
+    border-bottom: 2px solid hsl(0 0% 100%);
+  }
+
+  /* Win2000 menu bar item */
+  .win-menu-item {
+    padding: 3px 6px;
+    font-family: "Tahoma", "Verdana", Arial, sans-serif;
+    font-size: 11px;
+    color: hsl(0 0% 0%);
+  }
+  .win-menu-item:hover,
+  .win-menu-item.active {
+    background-color: hsl(213 100% 36%);
+    color: hsl(0 0% 100%);
+  }
+
+  /* Flat input field */
+  .win-input {
+    background: hsl(0 0% 100%);
+    border-top: 1px solid hsl(0 0% 30%);
+    border-left: 1px solid hsl(0 0% 30%);
+    border-right: 1px solid hsl(0 0% 88%);
+    border-bottom: 1px solid hsl(0 0% 88%);
+    font-family: "Tahoma", "Verdana", Arial, sans-serif;
+    font-size: 11px;
+    padding: 2px 4px;
+    color: hsl(0 0% 0%);
+  }
+
+  /* Status bar */
+  .win-statusbar {
+    background-color: hsl(210 11% 78%);
+    border-top: 1px solid hsl(0 0% 55%);
+    font-family: "Tahoma", "Verdana", Arial, sans-serif;
+    font-size: 11px;
+  }
+
+  /* Taskbar */
+  .win-taskbar {
+    background-color: hsl(210 11% 72%);
+    border-top: 2px solid hsl(0 0% 100%);
   }
 }
